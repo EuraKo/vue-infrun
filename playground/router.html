@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <router-link to="/login">login</router-link>
+        <router-link to="/main">main</router-link>
+      </div>
+        <router-view></router-view>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script>
+      var LoginComponent = {
+        template: '<div>login</div>',
+      };
+      var MainComponent = {
+        template: '<div>main</div>',
+      };
+      var Router = new VueRouter({
+        //   history : 해시값 삭제, 파일경로 전부사라짐 (hash :in browser, abstract : in node.js default)
+        //  근데 history 사용시 새로고침하면 404뜸
+        mode: 'history',
+        // 페이지의 라우팅 정보 : 배열안에 페이지는 객체로 들어감
+        routes: [
+          {
+            //   페이지의 url 이름
+            path: '/login',
+            //   해당 url에서 표시될 컴포넌트
+            component: LoginComponent,
+          },
+          {
+            path: '/main',
+            component: MainComponent,
+          },
+        ],
+      });
+
+      new Vue({
+        el: '#app',
+        router: Router,
+      });
+    </script>
+  </body>
+</html>
