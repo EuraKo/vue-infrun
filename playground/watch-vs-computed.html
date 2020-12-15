@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <p>개발자 모드 vue에서 데이터 바꿔보기</p>
+      {{ num }}
+      <button v-on:click=""></button>
+      <hr />
+      <a
+        href="https://vuejs.org/v2/guide/computed.html#Computed-vs-Watched-Property"
+      >
+        computed vs watched
+      </a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          num: 10,
+        },
+        computed: {
+          // v-valitate : 단순한 텍스트의 입력을 받아 valitation값을 계산해 주는 vue library로 대부분 computed로 작성되어있다
+          doubleNum: function () {
+            return this.num * 2;
+          },
+        },
+        watch: {
+          // 매번 실행되는게 부담되는 로직, 값이 변할때마다 메서드 실행하는거
+          num: function (newValue) {
+            this.fetchUserByNumber(newValue);
+          },
+        },
+        methods: {
+          fetchUserByNumber: function (num) {
+            console.log(num);
+            // axios.get(num);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .warning {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <p v-bind:class="{ warning : isError }">템플릿 표현식</p>
+      <p v-bind:class="errorTextColor">스크립트단으로 내린거</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          //   cname: 'blue-text',
+          isError: false,
+        },
+        computed: {
+          // coputed속성을 class bind나 기본 bind에 속성에 넣을 넣을 수 있다
+          errorTextColor: function () {
+            return this.isError ? 'warning' : null;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
