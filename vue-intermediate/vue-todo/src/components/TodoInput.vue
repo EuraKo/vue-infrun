@@ -18,11 +18,9 @@ export default {
     methods:{
         addTodo: function() {
             if(this.newTodoItem !== ''){
-                var obj = {completed: false, item: this.newTodoItem};
-                console.log(this.newTodoItem);
-                // localStorage.setItem(this.newTodoItem, obj);
-                // 그냥 obj로 넣으면 값이 [object Object]로 나와 어떤값이 들어갔는지 확인이 안된다 그렇게 때문에 아래처럼 strigify(객체를 문자화)를 시켜야한다.
-                localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
+                // this.$emit('이벤트이름','인자1','인자2','인자3',....);
+                // 이벤트이름은 app.vue template에 있음
+                this.$emit('addTodoItem', this.newTodoItem);
                 this.clearInput();
             }
         },
