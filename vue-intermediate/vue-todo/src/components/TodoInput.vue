@@ -2,17 +2,26 @@
     <div class="inputBox shadow">
         <input type="text" v-model="newTodoItem" v-on:keyup.enter="addTodo">
         <!-- <button v-on:click="addTodo">add</button> -->
-        <span class="addContainer">
+        <span class="addContainer" v-on:click="addTodo">
             +
         </span>
+        <!-- use the modal component, pass in the prop -->
+        <Modal v-if="showModal" @close="showModal = false">
+            <h3 slot="header">경고! <span class="cloaseModalBtn" @click="showModal = false">x</span></h3>
+            <div slot="body">입력하세요</div>
+            <footer slot="footer">copy right</footer>
+        </Modal>
     </div>
 </template>
 
 <script>
+import Modal from './common/Modal.vue'
+
 export default {
     data: function() {
         return {
-            newTodoItem: ""
+            newTodoItem: "",
+            showModal: false
         }
     },
     methods:{
@@ -22,11 +31,16 @@ export default {
                 // 이벤트이름은 app.vue template에 있음
                 this.$emit('addTodoItem', this.newTodoItem);
                 this.clearInput();
+            } else {
+                this.showModal = !this.showModal;
             }
         },
         clearInput:function(){
             this.newTodoItem = '';
         }
+    },
+    components: {
+        Modal : Modal
     }
 }
 </script>
@@ -56,5 +70,8 @@ export default {
     .addBtn{
         color:#fff;
         vertical-align: middle;
+    }
+    .cloaseModalBtn {
+        color:#42b983;
     }
 </style>

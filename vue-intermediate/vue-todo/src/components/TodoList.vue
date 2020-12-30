@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ul>
+        <transition-group name="list" tag="ul">
             <!-- vscode 특성상 v-bind:key를 지정해주지 않으면 오류로 출력된다 -->
             <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem.item" class="shadow">
                 <span class="checkBtn" v-bind:class="{checkBtnCompleted: todoItem.completed}" v-on:click="toggleComplate(todoItem, index)">check</span>
@@ -8,7 +8,7 @@
                 <!-- <button v-on:click="removeTodo"></button> -->
                 <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">del</span>
             </li>
-        </ul>
+        </transition-group >
     </div>
 </template>
 
@@ -60,5 +60,15 @@ export default {
     .removeBtn{
         margin-left: auto;
         color: #de4343;
+    }
+
+    /* list transition */
+
+    .list-enter-active, .list-leave-active {
+        transition: all 1s;
+    }
+    .list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+        opacity: 0;
+        transform: translateY(30px);
     }
 </style>
